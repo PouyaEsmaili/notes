@@ -6,7 +6,9 @@ metadata: notebooks_14_regression_metadata
 <h1>Contents</h1>
 <h1>Introduction</h1>
 <p>We have some data points and a number or a label is assigned to each data point. Our goal is to predict the number or label of an unseen data point after learning from the data we already have. We assume each data point is a vector $x$ and we want to predict $f(x)$. The first idea is to use interpolation. By using interpolation, we will have a high degree polynomial which fits our training data perfectly. But the problem is that, interpolation leads to overfitting. So the error for unseen data will be too large. In regression, we aim to find the best curve with lower degree. Although there will be some training error here, our test error will decrease since we are avoiding overfitting.</p>
-<h1>Linear Regression</h1>
+<h1>1 - What is regression ?</h1>
+<h2>Problem definition</h2>
+<h1>2 - Linear Regression</h1>
 <p>Here, we want to assign $f(x)$ to each data point $x$. In linear regression, we assume $f$ is a linear function. We can define $f$ as</p>
 <p>$$
     f_w(x) = w^T x = \begin{bmatrix}
@@ -36,6 +38,7 @@ $$</p>
 $$
 The main reason for using this function is that we can calculate gradient easily. So we can use gradient descent to find $\hat{w}$.</p>
 <h2>Finding $\hat{w}$</h2>
+<h3>Gradient Descent</h3>
 <p>We want to use gradient descent to find $\hat{w}$. First, we need to calculate $\nabla_w L(y_w, \hat{y})$ because it's used in the gradient descent method. The partial derivitives for MSE are:</p>
 <p>$$
     \frac{\partial MSE}{\partial w_j} = - \Sigma_{i = 1}^m x_j^{(i)} \left[ y_w^{(i)} - \hat{y}^{(i)} \right]
@@ -51,15 +54,18 @@ $$</p>
     w^{(i+1)} = w^{(i)} - \eta \nabla_{w^{(i)}} L
 $$</p>
 <p>where $\eta$ is the learning rate.</p>
-<h1>N'th Order Polynomial</h1>
-<h1>--------------------------------------------------------------------------</h1>
-<h1>Logistic Regression</h1>
-<h1>1 - What is regression ?</h1>
-<h2>Problem definition</h2>
-<h1>2 - Linear Regression</h1>
-<h2>definitions</h2>
-<h2>closed form equation</h2>
-<h2>Solving using GD</h2>
+<h3>Normal Equation</h3>
+<p>If we define</p>
+<p>$$
+    X = \begin{bmatrix}
+        x^{(1)} \ \vdots \ x^{(m)}
+    \end{bmatrix}
+$$</p>
+<p>and solve the equation $\nabla_w MSE = 0$, we get the normal equation. It's defined as
+$$
+    \hat{w} = (X^TX)^{-1} X^T \hat{y}.
+$$
+However, for using this equation, our features must be linearly independent. Otherwise, $(X^TX)^{-1}$ is not defined. In that case we can use pseudo inverse of $X^TX$ instead of the $(X^TX)^{-1}$. Since the calculation of inverse is computationaly inefficient, we usually prefer using gradient descent. </p>
 <h1>3 - Learning Curves using Polynomials</h1>
 <p>reduction to Linear regression</p>
 <h2>overfitting</h2>
