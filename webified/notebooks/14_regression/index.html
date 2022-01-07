@@ -1,0 +1,76 @@
+---
+layout: content
+metadata: notebooks_14_regression_metadata
+---
+<h1>Regression</h1>
+<h1>Contents</h1>
+<h1>Introduction</h1>
+<p>We have some data points and a number or a label is assigned to each data point. Our goal is to predict the number or label of an unseen data point after learning from the data we already have. We assume each data point is a vector $x$ and we want to predict $f(x)$. The first idea is to use interpolation. By using interpolation, we will have a high degree polynomial which fits our training data perfectly. But the problem is that, interpolation leads to overfitting. So the error for unseen data will be too large. In regression, we aim to find the best curve with lower degree. Although there will be some training error here, our test error will decrease since we are avoiding overfitting.</p>
+<h1>Linear Regression</h1>
+<p>Here, we want to assign $f(x)$ to each data point $x$. In linear regression, we assume $f$ is a linear function. We can define $f$ as</p>
+<p>$$
+    f_w(x) = w^T x = \begin{bmatrix}
+        w_0 &amp; w_1 &amp; \cdots &amp; w_n
+    \end{bmatrix} . \begin{bmatrix}
+        1 \ x_1 \ \vdots \ x_n
+    \end{bmatrix}.
+$$
+We assumed $x_0 = 1$ in $x$ to have bias in our function. So the data points are in an n-dimentional space.</p>
+<p>We also define $y$ as</p>
+<p>$$
+    y_w = \begin{bmatrix}
+        f_w(x^{(1)}) \ f_w(x^{(2)}) \ \vdots \ f_w(x^{(m)})
+    \end{bmatrix}
+$$
+where $x^{(i)}$ is the i'th data point. </p>
+<h2>Loss Function</h2>
+<p>After defining $f$, we need to find the best function. By defining a loss function, we can try to minimize loss by changing $w$ in the main function. Assuming $L$ as our loss function, best $f$ will be</p>
+<p>$$
+    \hat{w} = argmin_w L(y_w, \hat{y}) \rightarrow f_{best}(x) = f_{\hat{w}}(x) 
+$$</p>
+<p>where $\hat{y}$ is the given number for each data point.</p>
+<h3>Mean Squared Error (MSE)</h3>
+<p>The main loss function we use is mean squared error. It's defined as </p>
+<p>$$
+    MSE(y_w, \hat{y}) = \frac{1}{2} \Sigma_{i=1}^m \left[ y_w^{(i)} - \hat{y}^{(i)} \right]^2 .
+$$
+The main reason for using this function is that we can calculate gradient easily. So we can use gradient descent to find $\hat{w}$.</p>
+<h2>Finding $\hat{w}$</h2>
+<p>We want to use gradient descent to find $\hat{w}$. First, we need to calculate $\nabla_w L(y_w, \hat{y})$ because it's used in the gradient descent method. The partial derivitives for MSE are:</p>
+<p>$$
+    \frac{\partial MSE}{\partial w_j} = - \Sigma_{i = 1}^m x_j^{(i)} \left[ y_w^{(i)} - \hat{y}^{(i)} \right]
+$$</p>
+<p>So for gradinet, we have:</p>
+<p>$$
+    \nabla_w MSE = \begin{bmatrix}
+        \frac{\partial MSE}{\partial w_0} \ \vdots \ \frac{\partial MSE}{\partial w_n}
+    \end{bmatrix}
+$$</p>
+<p>Now, we can find $\hat{w}$ by the gradient descent algorithm as</p>
+<p>$$
+    w^{(i+1)} = w^{(i)} - \eta \nabla_{w^{(i)}} L
+$$</p>
+<p>where $\eta$ is the learning rate.</p>
+<h1>N'th Order Polynomial</h1>
+<h1>--------------------------------------------------------------------------</h1>
+<h1>Logistic Regression</h1>
+<h1>1 - What is regression ?</h1>
+<h2>Problem definition</h2>
+<h1>2 - Linear Regression</h1>
+<h2>definitions</h2>
+<h2>closed form equation</h2>
+<h2>Solving using GD</h2>
+<h1>3 - Learning Curves using Polynomials</h1>
+<p>reduction to Linear regression</p>
+<h2>overfitting</h2>
+<h1>4 - Regularization</h1>
+<h2>ridge (OPTIONAL)</h2>
+<h2>lasso (OPTIONAL)</h2>
+<h2>elastic (OPTIONAL)</h2>
+<h1>5 - Logistic Regression</h1>
+<h1>Conclusion</h1>
+<h1>Refrences</h1>
+<ul>
+<li>https://en.wikipedia.org/wiki/Linear_regression</li>
+<li>https://math.stackexchange.com/questions/1962877/compute-the-gradient-of-mean-square-error</li>
+</ul>
